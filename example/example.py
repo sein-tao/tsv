@@ -15,9 +15,3 @@ with bedFile.open("out.bed", 'w') as out:
     for rec in bedFile.open("input.bed", 'r'):
         if  rec.end - rec.start <= 500:
             out.write(rec)
-
-
-
-
-
-
