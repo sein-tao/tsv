@@ -21,12 +21,12 @@ VERSION	0.1
 """
 
 from xzopen import xzopen
-from collections import OrderedDict, namedtuple
+# from collections import OrderedDict, namedtuple
 from copy import copy, deepcopy
 
 class tsvFile(object):
     Record = None
-    def __init__(self, file, mode='r', template=None, **kwargs): 
+    def __init__(self, file, mode='r', template=None): 
         self.filename = file
         if mode in ('r','w'):
             self.mode = mode
@@ -42,6 +42,10 @@ class tsvFile(object):
             self.header = deepcopy(template.header)
         if mode == 'w':
             self._write_header()
+    
+    @classmethod
+    def open(cls, file, mode='r', template=None):
+        return cls(file, mode, template)
 
     def __iter__(self):
         return self
@@ -84,7 +88,7 @@ class tsvRecord(object):
             if len(rec) != len(self.__class__._fields):
                 raise ValueError("field number not match, line:\n" + "\t".join(rec))
             for i, k in enumerate(self.__class__._fields):
-                setattr(self, k, parser(k)(args[i]) )
+                setattr(self, k, parser(k)(rec[i]) )
         elif isinstance(rec, dict):
             for k, v in rec.iteritems():
                 setattr(self, k, v)
