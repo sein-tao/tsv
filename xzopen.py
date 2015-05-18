@@ -1,7 +1,8 @@
 """
-gzopen.pm - open (may) gzip/bz2 files
-XU Yu, <xuyu@genomics.org.cn>
+xzopen - open (may) gzip/bz2 files
+Sein Tao, <sein.tao@gmail.com>
 2012-07-07 19:33:41 CST
+2015-05-18
 """
 # __debug = True
 # if __debug: 
