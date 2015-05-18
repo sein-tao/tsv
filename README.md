@@ -1,9 +1,9 @@
-NAME
--------
+### Name
+
 tsv : class for tsv files with named fields, especially for bioinfomatics use.
 
-DESCRIPTION
--------
+### Description
+
 This module defines two class: tsvFile and tsvRecord, which serve as 
 the superclass for derived tsv file types.
 
@@ -15,8 +15,7 @@ the attribute names for Record columns.
 The tsvFile also support file with header lines. The tsvRecord also support self-defined behavior for each filed. See document for details
 
 
-EXAMPLE
--------
+### Example
 * define bed file 
 ```python
 import tsv
@@ -34,17 +33,14 @@ with bedFile.open("out.bed", 'w') as out:
             out.write(rec)
 ```
 
-REQUIREMENTS
--------
+### Requirements
 Python >= 2.6
 
-AUTHORS
--------
+### Authors
 Sein Tao
 
-LISENSE
--------
-This module is distributed under GNU GPL v2
+### Lisense
+GNU GPL v2
 
 
 
