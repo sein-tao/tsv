@@ -21,6 +21,7 @@ Example
 --------
 * define bed file
 .. code-block:: python
+
     import tsv
     class bedFile(tsv.tsvFile):
         class Record(tsv.tsvRecord):
@@ -29,6 +30,7 @@ Example
 
 * Read file, invoke fields and write file
 .. code-block:: python
+
     with bedFile.open("out.bed", 'w') as out:
         for rec in bedFile.open("input.bed", 'r'):
             if  rec.end - rec.start <= 500:
