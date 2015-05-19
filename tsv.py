@@ -81,17 +81,21 @@ class tsvRecord(object):
     _fields_default= dict()
 
     def __init__(self, rec):
+        cls = self.__class__
         if rec is None:
             pass
-        elif isinstance(rec, list):
-            parser = lambda k: self.__class__._fields_parser.get(k, lambda x:x)
-            if len(rec) != len(self.__class__._fields):
+        elif isinstance(rec, list) or isinstance(rec, tuple):
+            parser = lambda k: cls._fields_parser.get(k, lambda x:x)
+            if len(rec) != len(cls._fields):
                 raise ValueError("field number not match, line:\n" + "\t".join(rec))
-            for i, k in enumerate(self.__class__._fields):
+            for i, k in enumerate(cls._fields):
                 setattr(self, k, parser(k)(rec[i]) )
         elif isinstance(rec, dict):
             for k, v in rec.iteritems():
                 setattr(self, k, v)
+        elif isinstance(rec, tsvRecord):
+            for k in set(rec._fields).intersect(set(cls._fileds)):
+                setattr(self, k, rec.k)
         else:
             raise ValueError("Unknown argument type")
     def to_str(self):
