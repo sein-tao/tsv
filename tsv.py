@@ -23,6 +23,7 @@ VERSION	0.1
 from xzopen import xzopen
 # from collections import OrderedDict, namedtuple
 from copy import copy, deepcopy
+__all__ = ['tsvFile', 'tsvRecord', '_read_sha_header', '_write_sha_header']
 
 class tsvFile(object):
     Record = None
@@ -56,9 +57,9 @@ class tsvFile(object):
     def __exit__(self, exc, val, trace):
         self.close()
 
-    def next(self):
+    def __next__(self):
         "read the next record"
-        return self.Record(self._fh.next().rstrip("\n").split("\t"))
+        return self.Record(next(self._fh).rstrip("\n").split("\t"))
 
     def write(self, record):
         "write a record"
@@ -108,6 +109,33 @@ class tsvRecord(object):
         except KeyError:
             raise AttributeError("Attribute %s not exist." % attr)
 
+
+def _read_sha_header(self):
+    """read vcf-file like header. 
+    (meta lines starts with ##, header line start with #, no blanklines between).
+    """
+    self.meta = list()
+    has_header = None
+    while True:
+        line = next(self._fh)
+        if has_header is None:
+            has_header = line.startswith('##')
+            if not has_header:
+                raise ValueError("inputfile does not have header")
+        if line.startswith('##'):
+            self.meta.append(line)
+        elif line.startswith("#"):
+            self.header = line
+            break
+    return
+
+def _write_sha_header(self):
+    "write vcf-file like header."
+    if self.header:
+        for line in self.meta:
+            self._fh.write(line)
+        self._fh.write(self.header)
+    return
 
 
 
