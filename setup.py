@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
         name="tsv",
-        version="0.1",
+        version="0.2",
         description="operation of tsv file with named fields, especially in bioinfomatics",
         author="Sein Tao",
         author_email="sein.tao@gmail.com",

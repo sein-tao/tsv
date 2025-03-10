@@ -7,7 +7,7 @@ Sein Tao, <sein.tao@gmail.com>
 # __debug = True
 # if __debug: 
 #     import sys
-import __builtin__
+import builtins
 def xzopen(file, *args, **kargs):
     try:
         if file.endswith('.gz') or file.endswith('.bgz'):
@@ -19,12 +19,11 @@ def xzopen(file, *args, **kargs):
             import bz2
             return bz2.BZ2File(file, *args, **kargs)
         else:
-            return __builtin__.open(file, *args, **kargs)
+            return builtins.open(file, *args, **kargs)
     except:
         raise
 
-# deprecated, for compatibility
-open = xzopen
+
 
 if __name__ == '__main__':
     pass

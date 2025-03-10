@@ -3,10 +3,6 @@ Name
 
 tsv : class for tsv files with named fields, especially for bioinfomatics use.
 
-tsv now is part of BioUtil_ module. code here may out of date.
-
-.. _BioUtil: https://github.com/sein-tao/pyBioUtil
-
 Description
 -----------
 
@@ -42,7 +38,7 @@ Example
 
 Requirements
 ------------
-Python >= 2.6
+Python >= 3.0
 
 Authors
 --------
